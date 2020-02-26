@@ -58,8 +58,18 @@ function reduce(array, f, acc) {
 //solve it using the most appropriate helper functions(reduce,each,map,filter).
 //wordLengths("hello its me") // [5,3,2]
 
+
+//This function take a string as input then an array
 function wordLengths(str) {
     // TODO: your code here 
+   var arr = str.split(" ") // to put all the words in array and conserving its type.(array of strings)
+ 
+   return map ( arr , function (element,i){
+    
+      return element.length;    // map function permit to modify each element of the array and returnde a new array with modified values
+   } )
+
+
 }
 
 //=============================================================================
@@ -73,6 +83,16 @@ function wordLengths(str) {
 
 function countOccurrences(string, character) {
     // your code is here
+  var occ= 0 ; // we assigned the value 0 to the occ that will be returned
+
+    each ( string , function ( element){  // Function each permits to iterate a function on all the element of an array or string
+
+       if ( element===character){
+         occ= occ+1
+       }
+
+    }) 
+    return occ   // occ is the number of occurence of char
 }
 
 //=============================================================================
@@ -84,6 +104,14 @@ function countOccurrences(string, character) {
 // wordsLongerThanThree("Hello Mad World") //["Hello", "World"]
 
 function wordsLongerThanThree(str) {
+ 
+  return filter ( str , function (element ){   // function filter permit to return new array that contains only the elements that verify the condition of the function
+ 
+     return element.length>3
+
+  })
+
+   
     // TODO: your code here 
 }
 
@@ -100,6 +128,12 @@ function wordsLongerThanThree(str) {
 
 function repeatString(str, count) { 
  // TODO: your code here 
+
+ if (count === 0){   
+   return ''
+ }
+ return str+repeatString (str , count -1) // each time we decrement the parametre count until count become equal to zero
+
 } 
  
 
@@ -130,6 +164,54 @@ function repeatString(str, count) {
 
 // Write your code here .....
 
+
+function makePizza ( strOne , strTwo , sliceN ) {   
+   
+  var crust = strOne;        // global variables
+  var size = strTwo;
+  var numberOfSlice= sliceN;
+  var arrIng =[]
+  var wordIng =""
+
+  return {  
+             addIngrediants: function (ingrid){
+               if ( !(arrIng.includes(ingrid))){  // verify if the ingrediant is not in the array of ingridients called ingrid
+
+
+                arrIng.push(ingrid)
+           
+              }   
+               
+          }  , 
+
+          displayIngrediants : function (){
+         
+          for ( var i = 0 ; i< arrIng.length ;i++) {
+
+            wordIng = wordIng + " , " + arrIng[i]
+          }
+          
+            return wordIng.slice(3,wordIng.length)
+
+    }  , 
+
+            bakePizaa : function (){
+
+            return "Your " + crust + " "+size +" "+numberOfSlice+" pizza is done"
+            } ,
+
+            eatSlice : function (){
+               if (numberOfSlice >0){
+
+                return "You can eat your pizza";
+                 numberOfSlice=numberOfSlice-1
+               }
+
+            }
+}  
+      
+}
+
 //=============================================================================
 /*                                  Q6                                      */
 //=============================================================================
@@ -153,8 +235,52 @@ d- Decrement the number of "unread" books
 */
 
 // Now, to make sure that you are actually reading, make a comment below this and type: Yes I am
+   
+
+// Yes I'm 
 
 // Write your code here .....
+
+
+function ReadingList () {   // in OOP , a function starts with capital letter
+  var reading={}
+
+   
+
+   reading.read =0;
+
+   reading.unRead=0;
+
+   reading.toRead =[];
+
+   reading.currentRead="";
+
+    reading.readBooks=[];
+
+   reading.addBooks= addBooks;
+
+   reading.finishCurrentBook=finishCurrentBook;
+
+  return reading;
+} 
+
+var addBooks = function (bookName){
+
+  this.bookName=bookName;
+  this.toRead.push(this.bookName);
+  this.unread=this.unread+1
+
+}
+
+var finishCurrentBook = function() {
+ this.readBooks.push(currentRead);
+ this.read=this.read+1;
+ this.unreadBooks=this.unreadBooks-1
+ this.currentRead=this.toRead[0];
+}
+
+
+
 
 //=============================================================================
 /*                                  Q7                                       */
@@ -175,6 +301,28 @@ d- Decrement the number of "unread" books
 //  safe('money','small') => "watch gold-bar money"
 
 // Write your code here .....
+
+ function makeSafe (integer){
+   var integer = integer;
+   var word="";
+
+   return {
+
+       addItem: function (item, itemSize){
+         if (itemSize==="Small"||itemSize==="big"||itemSize==="meduim"){
+            if (item.length>integer){
+              return "Can't fit it"
+            } 
+            
+
+
+                       
+         }
+
+       }
+   }
+
+ }
 
 //=============================================================================
 /*                                  Q8                                       */
